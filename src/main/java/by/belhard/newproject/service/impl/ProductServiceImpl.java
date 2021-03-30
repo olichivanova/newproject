@@ -136,7 +136,7 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductID(product.getProductID());
         productDTO.setProductName(product.getProductName());
-        productDTO.setCategoryID(product.getCategoryID());
+       // productDTO.setCategoryID(product.getCategoryID());
         productDTO.setUnit(product.getUnit());
         productDTO.setPrice(product.getPrice());
         productDTO.setInStock(product.getInStock());
@@ -153,7 +153,7 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO productDTO1 = new ProductDTO();
         productDTO1.setProductID(product.getProductID());
         productDTO1.setProductName(product.getProductName());
-        productDTO1.setCategoryID(product.getCategoryID());
+       // productDTO1.setCategoryID(product.getCategoryID());
         productDTO1.setUnit(product.getUnit());
         productDTO1.setPrice(product.getPrice());
         productDTO1.setInStock(product.getInStock());
@@ -173,7 +173,7 @@ public class ProductServiceImpl implements ProductService {
         if(productDTO.getProductID()!= null)
         {product.setProductName(productDTO.getProductName());}
 
-        product.setCategoryID(categoryID);
+       // product.setCategoryID(categoryID);
         product.setUnit(productDTO.getUnit());
         product.setPrice(productDTO.getPrice());
         product.setInStock(productDTO.getInStock());
@@ -186,7 +186,7 @@ public class ProductServiceImpl implements ProductService {
             product.setProductID(productDTO.getProductID());
         }
         product.setProductName(productDTO.getProductName());
-        product.setCategoryID(productDTO.getCategoryID());
+       // product.setCategoryID(productDTO.getCategoryID());
         product.setUnit(productDTO.getUnit());
         product.setPrice(productDTO.getPrice());
         product.setInStock(productDTO.getInStock());

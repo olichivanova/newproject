@@ -62,7 +62,7 @@ public class ProductController {
     }
 
     @RequestMapping("/admin-products")
-    public String getAllProductsByCategoryAdmin(@RequestParam("categoryID") Integer id,  ModelMap modelMap) {
+    public String getAllProductsByCategoryAdmin(@RequestParam("categoryID") Integer id, ModelMap modelMap) {
         List<ProductDTO> products = productService.getAllProductsByCategoryWithCategory(id);
         modelMap.addAttribute("products", products);
 
@@ -70,9 +70,14 @@ public class ProductController {
     }
 
     @RequestMapping("/new-product")
-    public String addNewCategoryForm(ModelMap modelMap) {
+    public String addNewCategoryForm(@RequestParam("categoryID") Integer id, ModelMap modelMap) {
         ProductDTO productDTO = new ProductDTO();
-        modelMap.addAttribute("product1", productDTO);
+        List <ProductDTO> list = productService.getAllProductsByCategoryWithCategory(id);
+        ProductDTO productDTO1 =productService.getProductByProductIDAndCategory(list.get(0).getProductID()) ;
+        CategoryDTO categoryDTO1 = productDTO1.getCategory();
+        productDTO.setCategoryID(id);
+        productDTO.setCategory(categoryDTO1);
+        modelMap.addAttribute("product", productDTO);
         return "new-product";
     }
 
@@ -92,7 +97,7 @@ public class ProductController {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/edit-product")
+   @RequestMapping(value = "/edit-product")
     public String editCategory(@RequestParam("productID") Integer productID, ModelMap modelMap) {
         ProductDTO productDTO = productService.getProductByProductIDAndCategory(productID);
 
@@ -100,12 +105,13 @@ public class ProductController {
         return "/edit-product";
     }
     @RequestMapping(value = "/save-entity", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("product1") ProductDTO productDTO) {
-        Integer categoryID = productDTO.getCategoryID();
+    public String saveProduct(@ModelAttribute("product") ProductDTO productDTO) {
+        ProductDTO productDTO1 = productDTO;
+       /* Integer categoryID = productDTO.getCategoryID();
         List <ProductDTO> list = productService.getAllProductsByCategoryWithCategory(categoryID);
         ProductDTO productDTO1 =productService.getProductByProductIDAndCategory(list.get(0).getProductID()) ;
         CategoryDTO categoryDTO1 = productDTO1.getCategory();
-        productService.save(productDTO, categoryDTO1);
+        productService.save(productDTO, categoryDTO1);*/
         return "redirect:/admin";
 
     }

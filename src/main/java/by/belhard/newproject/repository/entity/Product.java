@@ -11,8 +11,8 @@ public class Product {
     Integer productID;
     @Column(name = "product_name")
     String productName;
-    @Column(name = "category_id", insertable = false, updatable = false)
-    int categoryID;
+   // @Column(name = "category_id", insertable = false, updatable = false)
+    //int categoryID;
     @Column
     String unit;
     @Column()
@@ -41,13 +41,6 @@ public class Product {
         this.productName = productName;
     }
 
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
-    }
 
     public String getUnit() {
         return unit;
@@ -86,7 +79,6 @@ public class Product {
         return "Product{" +
                 "productID=" + productID +
                 ", productName='" + productName + '\'' +
-                ", categoryID=" + categoryID +
                 ", unit='" + unit + '\'' +
                 ", price=" + price +
                 ", inStock=" + inStock +

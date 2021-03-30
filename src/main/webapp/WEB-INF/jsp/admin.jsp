@@ -38,6 +38,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
                     <button><a href="/delete-category?categoryID=${category.categoryID}">Delete</a></button>
                     <button><a href="/admin-products?categoryID=${category.categoryID}">OPEN</a></button>
+                    <button><a href="/new-product?categoryID=${category.categoryID}">ADD PRODUCT</a></button>
             </td>
             </tr>
         </c:forEach>

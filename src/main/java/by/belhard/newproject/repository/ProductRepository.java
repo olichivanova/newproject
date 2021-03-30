@@ -31,7 +31,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.category WHERE p.productID= :productID")
     public Product getProductByProductIDWithCategory(@Param("productID") Integer productID);
 
-    @Query("SELECT DISTINCT p FROM Product p WHERE p.categoryID =:categoryID")
+    @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.category WHERE p.category.categoryID =:categoryID")
     public List<Product> getAllProductsByCategoryWithCategory(@Param("categoryID") Integer categoryID);
 
 

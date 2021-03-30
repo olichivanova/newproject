@@ -17,32 +17,32 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         <table border="0" cellpadding="5">
             <tr>
                 <td>ID:</td>
-                <td><input type="text" th:field="${productID}" /></td>
+                <td><input type="text" name="productID" /></td>
 
             </tr>
             <tr>
                 <td>Name:</td>
-                <td><input type="text" th:field="${productName}" /></td>
+                <td><input type="text" name="productName" /></td>
 
             </tr>
             <tr>
             <td>Category  ID:</td>
-            <td><input type="text" th:field="${categoryID}" /></td>
+            <td><c:out value="${product.categoryID}" /> </td>
 
             </tr>
             <tr>
                 <td>Price:</td>
-                <td><input type="text" th:field="${price}" /></td>
+                <td><input type="text" name="price" /></td>
 
             </tr>
             <tr>
                 <td>Unit:</td>
-                <td><input type="text" th:field="${unit}" /></td>
+                <td><input type="text" name="unit" /></td>
 
             </tr>
             <tr>
                 <td>InStock:</td>
-                <td><input type="text" th:field="${inStock}" /></td>
+                <td><input type="text" name="inStock" /></td>
 
             </tr>
 

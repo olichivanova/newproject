@@ -133,7 +133,7 @@ public class CategoryServiceImpl implements CategoryService {
             Product product = new Product();
             product.setProductID(x.getProductID());
             product.setProductName(x.getProductName());
-            product.setCategoryID(category1.getCategoryID());
+          //  product.setCategoryID(category1.getCategoryID());
             product.setPrice(x.getPrice());
             product.setUnit(x.getUnit());
             product.setInStock(x.getInStock());

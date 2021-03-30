@@ -47,7 +47,15 @@ public class CategoryController  {
 
         modelMap.addAttribute("categoryDTOList", categoryDTOList);
         return "admin";
+
 }
+
+   /* @RequestMapping("/admin-open")
+    public String getCategory(@RequestParam Integer categoryID,  ModelMap modelMap){
+        CategoryDTO categoryDTO = categoryService.getCategoryByCategoryID(categoryID);
+        modelMap.addAttribute("categoryDTO", categoryDTO);
+        return "admin-open";}*/
+
 @RequestMapping("/new-category")
     public String addNewCategoryForm(ModelMap modelMap){
         CategoryDTO category = new CategoryDTO();
