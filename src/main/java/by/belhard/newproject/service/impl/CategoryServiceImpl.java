@@ -26,7 +26,10 @@ public class CategoryServiceImpl implements CategoryService {
         return convertFromEntityToDTO(categoryRepository.getCategoryByCategoryID(categoryID));
     }
 
-
+    @Override
+    public CategoryDTO getCategoryWithProducts(Integer categoryID) {
+        return  convertFromEntityToDTOWithProducts(categoryRepository.getCategoryWithProducts(categoryID));
+    }
 
     @Override
     public List<CategoryDTO> getAllCategories() {
@@ -34,12 +37,11 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDTOList;
     }
 
-   @Override
-    public void saveEntity(Category category) {
-        saveEntity(category);
-   }
+    @Override
+    public void saveEntity(ProductDTO productDTO, CategoryDTO categoryDTO) {
+        categoryRepository.save(convertFromDTOToEntityWithProducts(categoryDTO, productDTO));
 
-
+    }
 
     private List<CategoryDTO> convertFromListEntityToListDTO(List<Category> categoryList){
         List<CategoryDTO> categoryDTOList = new ArrayList<>();
@@ -81,14 +83,9 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDTO.setDescription(category.getDescription());
         return categoryDTO;}
 
-       /*private List<CategoryDTO> convertFromListEntityToListDTOWithProducts(List<Category> categories){
-            List<CategoryDTO> categoryDTOList = new ArrayList<>();
-            for (Category x: categories){
-                categoryDTOList.add( convertFromListEntityToListDTOWithProducts(x));
-            }
-            return categoryDTOList;}*/
 
-     /*  private CategoryDTO convertFromEntityToDTOWithProducts (Category category){
+
+      private CategoryDTO convertFromEntityToDTOWithProducts (Category category){
             CategoryDTO categoryDTO1 = new CategoryDTO();
             categoryDTO1.setCategoryID(category.getCategoryID());
             categoryDTO1.setCategoryName(category.getCategoryName());
@@ -96,18 +93,16 @@ public class CategoryServiceImpl implements CategoryService {
             List<ProductDTO> productDTOList = new ArrayList<>();
             for (Product x: category.getProducts()) {
                 ProductDTO productDTO = new ProductDTO();
+                productDTO.setProductID(x.getProductID());
                 productDTO.setProductName(x.getProductName());
-                productDTO.setCategoryID(x.getCategoryID());
                 productDTO.setUnit(x.getUnit());
                 productDTO.setPrice(x.getPrice());
                 productDTO.setInStock(x.getInStock());
                 productDTOList.add(productDTO);
             }
-           categoryDTO1.setProductDTOList(productDTOList);
+           categoryDTO1.setProducts(productDTOList);
 
-
-
-            return categoryDTO1;}*/
+            return categoryDTO1;}
 
    public Category convertFromDTOToEntity (CategoryDTO categoryDTO){
         Category category1 = new Category();
@@ -133,11 +128,11 @@ public class CategoryServiceImpl implements CategoryService {
             Product product = new Product();
             product.setProductID(x.getProductID());
             product.setProductName(x.getProductName());
-          //  product.setCategoryID(category1.getCategoryID());
             product.setPrice(x.getPrice());
             product.setUnit(x.getUnit());
             product.setInStock(x.getInStock());
             products.add(product);
+            product.setCategory(category1);
         }
         category1.setProducts(products);
         return category1;

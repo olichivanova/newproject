@@ -17,7 +17,6 @@ public interface ProductService {
     public void delete(Integer productID);
     public ProductDTO getProductByProductID(Integer productID);
     public ProductDTO getProductWithCategories( Integer categoryID );
-   // public ProductDTO getProductByCategoryIDAndCategory( Integer categoryID );
     public String getGreeting ();
     public List<ProductDTO> search(String keyword) ;
     public ProductDTO getProductByProductIDAndCategory( Integer productID);

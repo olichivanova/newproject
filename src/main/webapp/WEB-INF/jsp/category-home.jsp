@@ -10,28 +10,26 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 </head>
 <body>
 <div align="center">
-    <h2>PRODUCTS</h2>
-    <form method="get" action="search">
+    <h2>ALL CATEGORIES</h2>
+    <form method="get" action="search-category">
         <input type="text" name="keyword" />
         <input type="submit" value="Search" />
-        <a href=categories/search?keyword=${keyword}"></a>
+        <a href=categories-home/search-category?keyword=${keyword}"></a>
     </form>
-    <div align="left">
-        <h4><a href="/confirmation?orderID=${orderID}">CONFIRM THE ORDER</a></h4>
-    </div>
+
     <table border="1" cellpadding="5">
         <tr>
             <th>Name</th>
-            <th>Price</th>
+            <th>Description</th>
             <th>Action</th>
         </tr>
-        <c:forEach items="${products}" var="product">
+        <c:forEach items="${categoryDTOList1}" var="category">
             <tr>
-                <td>${product.productName}</td>
-                <td>${product.price}</td>
+                <td>${category.categoryName}</td>
+                <td>${category.description}</td>
 
                 <td>
-                    <button><a href="/products/open?orderID=${orderID}&productID=${product.productID}">OPEN</a></button>
+                    <button><a href="categories-home/next-home?categoryID=${category.categoryID}">OPEN</a></button>
 
                 </td>
             </tr>

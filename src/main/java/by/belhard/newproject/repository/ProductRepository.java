@@ -17,11 +17,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.category")
     public List<Product> getAllProductsWithCategories();
 
-   // @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.category WHERE p.categoryID= :categoryID")
-  // public Product getProductWithCategories(@Param( "categoryID") Integer categoryID );
-  // @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.category WHERE p.categoryID =:categoryID")
-  //  public Product getProductByCategoryID(@Param( "categoryID") Integer categoryID );
-
     public Product getProductByProductID(@Param("productID") Integer productID);
     public void deleteByProductID(@Param("productID") Integer productID);
     @Query(value = "SELECT p FROM Product p WHERE p.productName LIKE concat('%', :keyword,  '%') "
@@ -33,6 +28,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.category WHERE p.category.categoryID =:categoryID")
     public List<Product> getAllProductsByCategoryWithCategory(@Param("categoryID") Integer categoryID);
+
+    @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.category")
+    public List<Product> getAllCategories();
 
 
 

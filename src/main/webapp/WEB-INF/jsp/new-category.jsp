@@ -16,8 +16,8 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <form:form action="/save" method="post" modelAttribute="category">
         <table border="0" cellpadding="5">
             <tr>
-                <td>ID:</td>
-                <td><input type="text" name="categoryID" value="${categoryID}"/></td>
+
+                <td><input type="hidden" name="categoryID" value="${categoryID}"/></td>
 
             </tr>
             <tr>

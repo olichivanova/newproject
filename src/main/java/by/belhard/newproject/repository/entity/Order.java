@@ -1,6 +1,17 @@
 package by.belhard.newproject.repository.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+
 import java.util.Date;
 import java.util.List;
 
@@ -14,19 +25,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer orderID;
 
-    @Column(name = "client_id", insertable = false, updatable = false)
-    Integer clientID;
-
     @Column(name = "order_date")
     Date orderDate;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
+    public Client client;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id",  nullable = false)
-    Client client;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     List<OrderDetail> orderDetails;
+
+
     public Integer getOrderID() {
         return orderID;
     }
@@ -35,13 +44,6 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public Integer getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(Integer clientID) {
-        this.clientID = clientID;
-    }
 
     public Date getOrderDate() {
         return orderDate;
@@ -51,14 +53,29 @@ public class Order {
         this.orderDate = orderDate;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "orderID=" + orderID +
-                ", clientID=" + clientID +
                 ", orderDate=" + orderDate +
                 ", client=" + client +
-
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

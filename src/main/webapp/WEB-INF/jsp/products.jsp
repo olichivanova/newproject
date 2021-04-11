@@ -10,13 +10,23 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 </head>
 <body>
 <div align="center">
+    <h3> ${message}</h3>
+</div>
+
+<div align="center">
     <h2>ALL PRODUCTS</h2>
     <form method="get" action="search">
         <input type="text" name="keyword" />
         <input type="submit" value="Search" />
         <a href=/search?keyword=${keyword}"></a>
     </form>
-    <h3><a href="/categories">See all categories</a></h3>
+    <div align="left">
+        <h3><a href="/new-client">MAKE ORDER</a></h3>
+    </div>
+    <div align="left">
+        <h4><a href="/confirmation?orderID=${orderID}">CONFIRM THE ORDER</a></h4>
+    </div>
+    <h3><a href="/categories?orderID=${orderID}">See all categories</a></h3>
     <table border="1" cellpadding="5">
         <tr>
             <th>Name</th>
@@ -29,7 +39,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>${product.price}</td>
 
                 <td>
-                   <button><a href="/products/open?productID=${product.productID}">OPEN</a></button>
+                   <button><a href="/products/open?orderID=${orderID}&productID=${product.productID}">OPEN</a></button>
 
                 </td>
             </tr>

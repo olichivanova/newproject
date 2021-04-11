@@ -9,29 +9,32 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <title>WELCOME TO OUR ONLINE-SHOP </title>
 </head>
 <body>
+
+
 <div align="center">
-    <h2>PRODUCTS</h2>
+    <h2>ALL PRODUCTS</h2>
     <form method="get" action="search">
         <input type="text" name="keyword" />
         <input type="submit" value="Search" />
-        <a href=categories/search?keyword=${keyword}"></a>
+        <a href=/search?keyword=${keyword}"></a>
     </form>
     <div align="left">
-        <h4><a href="/confirmation?orderID=${orderID}">CONFIRM THE ORDER</a></h4>
+        <h3><a href="/new-client">MAKE ORDER</a></h3>
     </div>
+    <h3><a href="/categories-home">See all categories</a></h3>
     <table border="1" cellpadding="5">
         <tr>
             <th>Name</th>
             <th>Price</th>
             <th>Action</th>
         </tr>
-        <c:forEach items="${products}" var="product">
+        <c:forEach items="${productDTOList}" var="product">
             <tr>
                 <td>${product.productName}</td>
                 <td>${product.price}</td>
 
                 <td>
-                    <button><a href="/products/open?orderID=${orderID}&productID=${product.productID}">OPEN</a></button>
+                    <button><a href="/products-home/open?productID=${product.productID}">OPEN</a></button>
 
                 </td>
             </tr>

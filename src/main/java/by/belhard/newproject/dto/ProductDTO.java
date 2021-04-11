@@ -6,7 +6,6 @@ import by.belhard.newproject.repository.entity.Category;
 public class ProductDTO {
     private Integer productID;
     private String productName;
-    private Integer categoryID;
     private String unit;
     private float price;
     private float inStock;
@@ -15,24 +14,9 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(Integer productID, String productName, Integer categoryID, String unit, float price, float inStock) {
-        this.productID = productID;
-        this.productName = productName;
-        this.categoryID = categoryID;
-        this.unit = unit;
-        this.price = price;
-        this.inStock = inStock;
-    }
 
-    public ProductDTO(Integer productID, String productName, Integer categoryID, String unit, float price, float inStock, CategoryDTO category) {
-        this.productID = productID;
-        this.productName = productName;
-        this.categoryID = categoryID;
-        this.unit = unit;
-        this.price = price;
-        this.inStock = inStock;
-        this.category = category;
-    }
+
+
 
     public ProductDTO(Integer productID, String productName, String unit, float price, float inStock, CategoryDTO category) {
         this.productID = productID;
@@ -41,10 +25,6 @@ public class ProductDTO {
         this.price = price;
         this.inStock = inStock;
         this.category = category;
-    }
-
-    public ProductDTO(Integer productID, String soap, String kg, float v, float v1) {
-        this.productID = productID;
     }
 
     public Integer getProductID() {
@@ -61,14 +41,6 @@ public class ProductDTO {
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
     }
 
     public String getUnit() {
@@ -108,7 +80,6 @@ public class ProductDTO {
         return "ProductDTO{" +
                 "productID=" + productID +
                 ", productName='" + productName + '\'' +
-                ", categoryID=" + categoryID +
                 ", unit='" + unit + '\'' +
                 ", price=" + price +
                 ", inStock=" + inStock +

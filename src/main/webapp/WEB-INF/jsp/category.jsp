@@ -16,6 +16,9 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         <input type="submit" value="Search" />
         <a href=categories/search-category?keyword=${keyword}"></a>
     </form>
+    <div align="left">
+        <h4><a href="/confirmation?orderID=${orderID}">CONFIRM THE ORDER</a></h4>
+    </div>
 
     <table border="1" cellpadding="5">
         <tr>
@@ -29,7 +32,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>${category.description}</td>
 
                 <td>
-                    <button><a href="categories/next?categoryID=${category.categoryID}">OPEN</a></button>
+                    <button><a href="categories/next?orderID=${orderID}&categoryID=${category.categoryID}">OPEN</a></button>
 
                 </td>
             </tr>

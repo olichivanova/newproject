@@ -1,8 +1,17 @@
 package by.belhard.newproject.repository.entity;
 
-import lombok.*;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+
 import java.util.List;
 
 
@@ -13,6 +22,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      Integer categoryID;
+
 
     @Column(name = "category_name")
      String categoryName;
@@ -31,12 +41,14 @@ public class Category {
         this.description = description;
     }
 
-    public int getCategoryID() {
-        return categoryID;
+    public Category(Integer categoryID, String categoryName, String description) {
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+        this.description = description;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public Integer getCategoryID() {
+        return categoryID;
     }
 
     public String getCategoryName() {

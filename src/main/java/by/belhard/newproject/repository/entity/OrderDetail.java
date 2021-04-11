@@ -1,7 +1,16 @@
 package by.belhard.newproject.repository.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 
 @Entity
@@ -13,11 +22,6 @@ public class OrderDetail {
             @Column(name = "order_detailid")
     Integer orderDetailID;
 
-    @Column(name = "order_id", insertable = false, updatable = false)
-    Integer orderID;
-
-    @Column(name = "product_id")
-    Integer productID;
 
     @Column
     float quantity;
@@ -28,9 +32,12 @@ public class OrderDetail {
     @Column
     float total;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id",  nullable = false)
     Order order;
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    Product product;
 
 
     public Integer getOrderDetailID() {
@@ -41,21 +48,6 @@ public class OrderDetail {
         this.orderDetailID = orderDetailID;
     }
 
-    public Integer getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(Integer orderID) {
-        this.orderID = orderID;
-    }
-
-    public Integer getProductID() {
-        return productID;
-    }
-
-    public void setProductID(Integer productID) {
-        this.productID = productID;
-    }
 
     public float getQuantity() {
         return quantity;
@@ -81,16 +73,31 @@ public class OrderDetail {
         this.total = total;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "OrderDetail{" +
                 "orderDetailID=" + orderDetailID +
-                ", orderID=" + orderID +
-                ", productID=" + productID +
                 ", quantity=" + quantity +
                 ", price=" + price +
                 ", total=" + total +
                 ", order=" + order +
+                ", product=" + product +
                 '}';
     }
 }

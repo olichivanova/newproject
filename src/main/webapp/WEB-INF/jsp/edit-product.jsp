@@ -13,7 +13,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <body>
 <div align="center">
     <h2>Edit Product</h2>
-    <form:form action="/save-product" method="post" modelAttribute="product" >
+    <form:form action="/save-pr" method="post" modelAttribute="product" >
         <table border="2" cellpadding="7">
             <tr>
                 <td>ID:</td>
@@ -25,11 +25,16 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td><input type="text" name="productName" value="<c:out value= '${product.productName}' />"/> </td>
 
             </tr>
-            <tr>
-                <td>CategoryID:</td>
-                <td><input type="text" name="categoryID" value="<c:out value= '${product.categoryID}' />"/> </td>
+            <td><form:label path="category.categoryID">Category:</form:label></td>
+            <td>
+                <form:select path="category.categoryID" >
+                    <form:option value="2">Select a category</form:option>
+                    <c:forEach items="${categoryDTOList}" var="category">
+                        <form:option value="${category.categoryID}">${category.categoryName}</form:option>
+                    </c:forEach>
+                </form:select>
+            </td>
 
-            </tr>
             <tr>
                 <td>Price:</td>
                 <td><input type="text" name="price" value="<c:out value= '${product.price}' />"/> </td>
@@ -46,7 +51,9 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <div align="center"/>
             <td colspan="2"><input type="submit" value="Save"></td>
             </tr>
+
         </table>
+
     </form:form>
 </div>
 </body>

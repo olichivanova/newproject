@@ -16,31 +16,29 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         <input type="submit" value="Search" />
         <a href=categories/search?keyword=${keyword}"></a>
     </form>
-    <div align="right">
-        <h3><a href="/new-product?categoryID=${categoryID}">ADD NEW PRODUCT</a></h3>
-    </div>
+
 
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>CategoryID</th>
             <th>Price</th>
             <th>Unit</th>
             <th>inStock</th>
+            <th>Category</th>
             <th>Action</th>
         </tr>
         <c:forEach items="${products}" var="product">
             <tr>
                 <td>${product.productID}</td>
                 <td>${product.productName}</td>
-                <td>${product.categoryID}</td>
                 <td>${product.price}</td>
                 <td>${product.unit}</td>
                 <td>${product.inStock}</td>
+                <td>${categoryID}</td>
 
                 <td>
-                    <button> <a href="/edit-product?productID=${product.productID}">Edit</a></button>
+                    <button> <a href="/edit-product?categoryID=${categoryID}&productID=${product.productID}">Edit</a></button>
                     <button><a href="/delete-product?productID=${product.productID}">Delete</a></button>
 
 

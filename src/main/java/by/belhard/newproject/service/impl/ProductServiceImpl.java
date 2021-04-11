@@ -7,7 +7,6 @@ import by.belhard.newproject.repository.entity.Category;
 import by.belhard.newproject.repository.entity.Product;
 import by.belhard.newproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,10 +54,7 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
-  /*  @Override
-    public ProductDTO getProductByCategoryID(Integer categoryID) {
-        return convertFromEntityToDTOWithCategories(productRepository.getProductByCategoryID(categoryID));
-    }*/
+
 
     @Override
     public ProductDTO getProductByProductID(Integer productID) {
@@ -109,21 +105,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void save(ProductDTO productDTO, Integer categoryID) {
-        Product product = convertFromDTOToEntity(productDTO, categoryID);
+        Product product = convertFromDTOToEntity(productDTO);
         productRepository.save(product);
     }
-    /*  @Override
-    public ProductDTO getProductWithCategories(Integer categoryID) {
-        ProductDTO productDTO = convertFromEntityToDTOWithCategories(productRepository.getProductWithCategories(categoryID));
-        return null;
-    }*/
 
-    /*  @Override
-    public ProductDTO getProductByProductIDWithCategory(Integer productID) {
-        if (productRepository.getProductByProductIDWithCategory(productID) == null);
-        System.out.println("no such products");
-        return convertFromEntityToDTOWithCategories(productRepository.getProductByProductIDWithCategory(productID));
-    }*/
 
     private List<ProductDTO> convertFromListEntityToListDTOWithCategories(List<Product> products){
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -136,11 +121,15 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductID(product.getProductID());
         productDTO.setProductName(product.getProductName());
-       // productDTO.setCategoryID(product.getCategoryID());
         productDTO.setUnit(product.getUnit());
         productDTO.setPrice(product.getPrice());
         productDTO.setInStock(product.getInStock());
-        productDTO.setCategory(new CategoryDTO(product.getCategory().getCategoryID(), product.getCategory().getCategoryName(), product.getCategory().getDescription()));
+        CategoryDTO categoryDTO = new CategoryDTO();
+        if(product.getCategory().getCategoryID() != null)
+        { categoryDTO.setCategoryID(product.getCategory().getCategoryID());}
+        categoryDTO.setCategoryName(product.getCategory().getCategoryName());
+        categoryDTO.setDescription(product.getCategory().getDescription());
+        productDTO.setCategory(categoryDTO);
         return productDTO;
     }
     private List<ProductDTO> convertFromListEntityToListDTO(List<Product> products){
@@ -153,27 +142,25 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO productDTO1 = new ProductDTO();
         productDTO1.setProductID(product.getProductID());
         productDTO1.setProductName(product.getProductName());
-       // productDTO1.setCategoryID(product.getCategoryID());
         productDTO1.setUnit(product.getUnit());
         productDTO1.setPrice(product.getPrice());
         productDTO1.setInStock(product.getInStock());
-       // productDTO1.setCategory(new CategoryDTO());
+        CategoryDTO categoryDTO = new CategoryDTO();
+        if(categoryDTO.getCategoryID() != null)
+        { categoryDTO.setCategoryID(product.getCategory().getCategoryID());}
+        categoryDTO.setCategoryName(product.getCategory().getCategoryName());
+        categoryDTO.setDescription(product.getCategory().getDescription());
+        productDTO1.setCategory(categoryDTO);
+
 
         return productDTO1;}
 
-   /* private List<Product> convertFromListDTOToListEntity(List<ProductDTO> productDTOS){
-        List<Product> products = new ArrayList<>();
-        for (ProductDTO product: productDTOS){
-            products.add(convertFromDTOToEntity(product));
-        }
-        return products;}*/
 
-       private Product convertFromDTOToEntity(ProductDTO productDTO, Integer categoryID){
+
+       private Product convertFromDTOToEntity(ProductDTO productDTO){
         Product product = new Product();
         if(productDTO.getProductID()!= null)
         {product.setProductName(productDTO.getProductName());}
-
-       // product.setCategoryID(categoryID);
         product.setUnit(productDTO.getUnit());
         product.setPrice(productDTO.getPrice());
         product.setInStock(productDTO.getInStock());
@@ -186,11 +173,17 @@ public class ProductServiceImpl implements ProductService {
             product.setProductID(productDTO.getProductID());
         }
         product.setProductName(productDTO.getProductName());
-       // product.setCategoryID(productDTO.getCategoryID());
         product.setUnit(productDTO.getUnit());
         product.setPrice(productDTO.getPrice());
         product.setInStock(productDTO.getInStock());
-        product.setCategory(convertFromDTOToEntity(categoryDTO, product));
+        Category category1 = new Category();
+        if(categoryDTO.getCategoryID() != null){
+            category1.setCategoryID(categoryDTO.getCategoryID());
+        }
+        category1.setCategoryName(categoryDTO.getCategoryName());
+        category1.setDescription(categoryDTO.getDescription());
+        product.setCategory(category1);
+
         return product;
     }
     private Category convertFromDTOToEntity ( CategoryDTO categoryDTO, Product product){
